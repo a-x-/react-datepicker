@@ -41668,6 +41668,7 @@
             className: this.props.popperClassName,
             hidePopper: !this.isCalendarOpen(),
             popperModifiers: this.props.popperModifiers,
+            popperReactPortal: this.props.popperReactPortal,
             targetComponent: _react2.default.createElement(
               "div",
               { className: "react-datepicker__input-container" },
@@ -41746,6 +41747,7 @@
           _popper_component.popperPlacementPositions
         ), // <PopperComponent/> props
         popperProps: _propTypes2.default.object,
+        popperReactPortal: _propTypes2.default.bool,
         preventOpenOnFocus: _propTypes2.default.bool,
         readOnly: _propTypes2.default.bool,
         required: _propTypes2.default.bool,
@@ -55533,6 +55535,10 @@
 
       var _react2 = _interopRequireDefault(_react);
 
+      var _reactDom = __webpack_require__(331);
+
+      var _reactDom2 = _interopRequireDefault(_reactDom);
+
       var _propTypes = __webpack_require__(527);
 
       var _propTypes2 = _interopRequireDefault(_propTypes);
@@ -55581,20 +55587,8 @@
             : (subClass.__proto__ = superClass);
       }
 
-      var popperPlacementPositions = (exports.popperPlacementPositions = [
-        "bottom",
-        "bottom-end",
-        "bottom-start",
-        "left",
-        "left-end",
-        "left-start",
-        "right",
-        "right-end",
-        "right-start",
-        "top",
-        "top-end",
-        "top-start"
-      ]);
+      var popperPlacementPositions = (exports.popperPlacementPositions =
+        _reactPopper.placements);
 
       var PopperComponent = (function(_React$Component) {
         _inherits(PopperComponent, _React$Component);
@@ -55664,6 +55658,15 @@
             );
           }
 
+          debugger;
+          if (this.props.popperReactPortal) {
+            popper = _reactDom2.default.createPortal(
+              popper,
+              window.document.body
+            );
+            debugger;
+          }
+
           return _react2.default.createElement(
             _reactPopper.Manager,
             null,
@@ -55711,6 +55714,7 @@
         hidePopper: _propTypes2.default.bool,
         popperComponent: _propTypes2.default.element,
         popperModifiers: _propTypes2.default.object, // <datepicker/> props
+        popperReactPortal: _propTypes2.default.bool,
         popperPlacement: _propTypes2.default.oneOf(popperPlacementPositions), // <datepicker/> props
         popperContainer: _propTypes2.default.func,
         popperProps: _propTypes2.default.object,
